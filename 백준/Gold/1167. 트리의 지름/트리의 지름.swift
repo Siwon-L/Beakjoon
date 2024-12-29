@@ -1,35 +1,48 @@
+import Foundation
+
+struct Node {
+  let num: Int
+  let leng: Int
+}
+
 let n = Int(readLine()!)!
-var graph = [[(Int, Int)]](repeating: [], count: n + 1)
-var visited = [Bool](repeating: false, count: n + 1)
-for _ in 0..<n {
-    let input = readLine()!.dropLast(2).split(separator: " ").map { Int($0)! }
-    let node = input[0]
-    var index = 1
-    while index < input.count {
-        graph[node].append((input[index], input[index + 1]))
-        index += 2
-    }
+
+var link: [[Node]] = Array(repeating: [], count: n + 1)
+var visited = Array(repeating: false, count: n + 1)
+
+for i in 1...n {
+  let input = readLine()!.split(separator: " ").map { Int($0)! }
+  for j in 1..<input.count / 2 {
+    link[input[0]].append(Node(num: input[j*2-1], leng: input[j*2]))
+  }
 }
 
-var endNode: (node: Int, cost: Int) = (node: 0, cost: 0)
-
-func dfs(node: Int, depth: Int) {
-    visited[node] = true
-    
-    if depth > endNode.cost {
-        endNode = (node, depth)
+func dfs(start: Int, leng: Int) {
+  if result < leng {
+    result = leng
+    endNodeNum = start
+  }
+  
+  for node in link[start] {
+    let next = node.num
+    if !visited[next] {
+      visited[next] = true
+      dfs(start: next, leng: leng + node.leng)
+      visited[next] = false
     }
-    
-    for (nextNode, distance) in graph[node] {
-        if !visited[nextNode] {
-            visited[nextNode] = true
-            dfs(node: nextNode, depth: depth + distance)
-            visited[nextNode] = false
-        }
-    }
+  }
 }
 
-dfs(node: 1, depth: 0)
-visited = [Bool](repeating: false, count: n + 1)
-dfs(node: endNode.node, depth: 0)
-print(endNode.cost)
+var result = 0
+var endNodeNum = -1
+
+visited[1] = true
+dfs(start: 1, leng: 0)
+
+visited = Array(repeating: false, count: n + 1)
+
+visited[endNodeNum] = true
+dfs(start: endNodeNum, leng: 0)
+
+
+print(result)
