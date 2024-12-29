@@ -38,11 +38,10 @@ var endNodeNum = -1
 
 visited[1] = true
 dfs(start: 1, leng: 0)
-
-visited = Array(repeating: false, count: n + 1)
+visited[1] = false
 
 visited[endNodeNum] = true
 dfs(start: endNodeNum, leng: 0)
-
+visited[endNodeNum] = false
 
 print(result)
