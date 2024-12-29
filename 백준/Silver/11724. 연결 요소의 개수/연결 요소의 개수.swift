@@ -1,22 +1,3 @@
-struct Queue<T> {
-  var memory = [T]()
-  var index = 0
-  
-  var isEmpty: Bool {
-    memory.count < index + 1
-  }
-  
-  mutating func inQueue(element: T) {
-    memory.append(element)
-  }
-  
-  mutating func deQueue() -> T {
-    let v = memory[index]
-    index += 1
-    return v
-  }
-}
-
 let nm = readLine()!.split(separator: " ").map { Int($0)! }
 let n = nm[0]
 let m = nm[1]
