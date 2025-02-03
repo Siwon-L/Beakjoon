@@ -17,7 +17,7 @@ func dfs(start: Int, r: Int) {
   for i in link[start] {
     if result[r][i] != "1" {
       result[r][i] = "1"
-      if i != r { dfs(start: i, r: r) }
+      dfs(start: i, r: r)
     }
   }
 }
