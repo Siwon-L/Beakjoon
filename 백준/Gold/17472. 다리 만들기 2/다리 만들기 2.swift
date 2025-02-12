@@ -128,6 +128,7 @@ for i in 0..<n {
 
 print(mst(edges: edges))
 
+/// 각 번호가 부여된 섬들간 연결 가능한 모든 간선 체크를 위한 dfs
 func dfs(start: (y: Int, x: Int), count: Int, target: Int, direction: (y: Int, x: Int)) {
   
   let next = (y: start.y + direction.y, x: start.x + direction.x)
@@ -140,7 +141,7 @@ func dfs(start: (y: Int, x: Int), count: Int, target: Int, direction: (y: Int, x
   }
 }
 
-
+/// 각 섬의 번호를 부여하기 위한 bfs
 func bfs(start: (y: Int, x: Int), island: Int) {
   visited[start.y][start.x] = true
   map[start.y][start.x] = island
@@ -163,6 +164,7 @@ func bfs(start: (y: Int, x: Int), island: Int) {
   }
 }
 
+/// dfs를 통해 만들어진 모든 간선을 통해 최소 스패팅 트리 구하기 위한 mst
 func mst(edges: [[(v: Int, e: Int)]]) -> Int {
   var visited = Array(repeating: false, count: 7-islands.count)
   var result = 0
@@ -187,3 +189,4 @@ func mst(edges: [[(v: Int, e: Int)]]) -> Int {
     return result
   }
 }
+
