@@ -6,7 +6,7 @@ let numbers = Array(1...n)
 var visited = Array(repeating: false, count: n)
 var results = [[Int]]()
 
-xx(result: [])
+makePermutation(result: [])
 
 results.forEach {
     $0.forEach { number in
@@ -15,14 +15,14 @@ results.forEach {
     print("")
 }
 
-func xx(result: [Int]) {
+func makePermutation(result: [Int]) {
     if result.count == m {
         results.append(result)
     }
     for i in 0..<n {
         if !visited[i] {
             visited[i] = true
-            xx(result: result + [numbers[i]])
+            makePermutation(result: result + [numbers[i]])
             visited[i] = false
         }
     }
